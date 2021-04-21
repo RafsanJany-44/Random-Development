@@ -1,0 +1,17 @@
+#todo
+
+1. group delete function retstrucute algorrithm
+2. creat group add memeber send msg and delete group
+3. make a group with WY
+4. finding Stives bp_id
+
+
+
+
+
+group_delete proposal algorithm:
+
+1. fetcth every topic_id from disscussion_topic and delete that topic_id from discussion_topic_bp_action
+2. delete from disscussion_topic where org_id= and dc_id=
+3.delete from discussion_category where org_id= and dc_id=
+4.delete from discussion_category_members where org_id= and dc_id= 
