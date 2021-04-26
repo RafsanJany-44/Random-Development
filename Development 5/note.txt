@@ -1,0 +1,47 @@
+#todo group signal R connectivity
+
+1. SignalR should be connected with group chat
+
+
+
+
+#todo delete function is not working
+
+1. group delete function retstrucute algorrithm
+2. in msg.chat_save	cursor1 CURSOR FOR 
+		SELECT bp_id 
+		FROM  public.discussion_category_members
+		WHERE dc_id = p_dc_id;
+here another condition should be added org_id=p_org_id
+
+
+group_delete proposal algorithm:
+
+1. fetcth every topic_id from disscussion_topic and delete that topic_id from discussion_topic_bp_action
+2. delete from disscussion_topic where org_id= and dc_id=
+3.delete from discussion_category where org_id= and dc_id=
+4.delete from discussion_category_members where org_id= and dc_id= 
+
+
+
+
+#todo later
+
+ message delete algorithm: 2 types...one is for me another is for every one. 
+
+select * from public.discussion_topic where topic_details='waseem alarm'
+
+select * from public.discussion_topic_bp_action where topic_id=82775
+
+delete from public.discussion_topic_bp_action where topic_id=82775
+
+delete from public.discussion_topic where topic_id=82775
+
+
+there is two type of delete functionality. one is the for own(remove for you) another is for all(remove for all).... tow option will apear for
+ for sender own msg. and only one option( remove for you) will apear for other msg
+
+#todo what i done today
+
+1. message aligment
+2. testing of 
