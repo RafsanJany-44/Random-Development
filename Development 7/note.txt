@@ -1,0 +1,29 @@
+
+
+
+
+
+
+
+#todo delete function is not working
+
+1. group delete function retstrucute algorrithm
+2. in msg.chat_save	cursor1 CURSOR FOR 
+		SELECT bp_id 
+		FROM  public.discussion_category_members
+		WHERE dc_id = p_dc_id;
+here another condition should be added org_id=p_org_id
+
+
+group_delete proposal algorithm:
+
+1. fetcth every topic_id from disscussion_topic and delete that topic_id from discussion_topic_bp_action
+2. delete from disscussion_topic where org_id= and dc_id=
+3.delete from discussion_category where org_id= and dc_id=
+4.delete from discussion_category_members where org_id= and dc_id= 
+
+
+
+
+select set_session(465075);
+

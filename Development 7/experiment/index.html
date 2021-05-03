@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+<body style="background-color:black;">
+<h2><font color="red">Json Consol inspect</font></h2>
+<p id="demo"></p>
+
+
+
+
+
+
+<script>
+
+var txt = '{"name":"John", "age":30, "city":"New York"}'
+var obj = JSON.parse(txt);
+document.getElementById("demo").innerHTML = obj.name + ", " + obj.age;
+
+
+
+// Store JSON data in a JS variable
+var json = "[{\"org_id\":2,\"dc_id\":14589,\"parent_dc_id\":14589,\"pt_id\":null,\"dc_name\":\"Chat and Video Conference\",\"dc_details\":null,\"discussion_class\":\"PUBLIC_GROUP\",\"is_deleted\":0,\"access_roles\":\"-\",\"authorized_roles\":null,\"entered_by\":-2,\"entered_on\":\"2021-02-11T12:26:32.371393+01:00\",\"last_updated_by\":-2,\"last_updated_on\":\"2021-02-11T12:26:32.371393+01:00\"}, \n {\"org_id\":2,\"dc_id\":14590,\"parent_dc_id\":14590,\"pt_id\":null,\"dc_name\":\"Erfan,Rafsan,Ashiqur\",\"dc_details\":null,\"discussion_class\":\"PRIVATE_GROUP\",\"is_deleted\":0,\"access_roles\":\"-\",\"authorized_roles\":null,\"entered_by\":-2,\"entered_on\":\"2021-02-11T12:27:18.801423+01:00\",\"last_updated_by\":-2,\"last_updated_on\":\"2021-02-11T12:27:18.801423+01:00\"}]";
+
+// Converting JSON-encoded string to JS object
+
+var json2='';
+var org_id=2;
+var dc_name="dc name";
+var discussion_class='Public_group';
+members='';
+var i;
+var bp_id=["2","3","4","5"];
+var role_code=["ss","dd","dd","pp"];
+for(i=0; i<role_code.length;i++){
+    console.log(i)
+}
+
+
+
+//'{"org_id": "2","dc_name":"rj test 18","discussion_class": "PUBLIC_GROUP","members":[{"bp_id":"7","role_code":"$CGPART"},{"bp_id":"8","role_code":"$CGPART"},{"bp_id":"9","role_code":"$CGPART"}]}'
+
+
+var j_obj = JSON.parse(json);
+var string_obj= JSON.stringify(json);
+
+
+document.getElementById("demo").innerHTML =  obj.dc_id;
+
+
+console.log(j_obj[0].dc_name); //working
+console.log(string_obj);
+
+
+
+
+function ret_json(org_id,dc_id,bp_id,role_code){
+    var str='{"org_id":"'+org_id+'","dc_id":"'+dc_id+'","bp_id":"'+bp_id+'","role_code":"'+role_code+'"}';
+    var str_arr='[{"org_id":"'+org_id+'","dc_id":"'+dc_id+'","bp_id":"'+bp_id+'","role_code":"'+role_code+'"}]';
+   
+    var obj=JSON.parse(str);
+    var obj_arr=JSON.parse(str_arr);
+    console.log("___________-----_________-----___",obj.org_id);
+    console.log("___________-----_________-----___",obj_arr[0].org_id);
+    
+    
+}
+ ret_json(2,3,4,'rafsan');
+
+
+//----------------------------------------------------------------------------
+function genarate_group(org_id,dc_name,dc_class,bp_ids,role_codes){
+
+    var members_query_string='[';
+    var final_query_string='';
+
+    for(var i=0; i<bp_ids.length;i++)
+    {
+        members_query_string=members_query_string+'{"bp_id":"'+bp_ids[i]+'","role_code":"'+role_codes[i]+'"}';
+    
+        if (i<bp_ids.length-1)
+        {
+        members_query_string=members_query_string+','
+        }
+        else{
+        members_query_string=members_query_string+']'
+        }
+    }
+
+    final_query_string='{"org_id":"'+org_id+'","dc_name":"'+dc_name+'","discussion_class":"'+dc_class+'","members":'+members_query_string+'}';
+
+console.log(final_query_string);
+}
+
+bp_ids=[3,4,5,6];
+role_codes=["$CGPART","$CGPART","$CGPART","$CGPART"];
+
+genarate_group(2,'rj test 22',"PUBLIC_GROUP",bp_ids,role_codes);
+//----------------------------------------------------------------------
+
+
+function genarate_group_members(org_id,dc_id,bp_ids,role_codes){
+
+var members_query_string='[';
+
+
+for(var i=0; i<bp_ids.length;i++)
+{
+    members_query_string=members_query_string+'{"org_id":"'+org_id+'","dc_id":"'+dc_id+'","bp_id":"'+bp_ids[i]+'","role_code":"'+role_codes[i]+'"}';
+
+    if (i<bp_ids.length-1)
+    {
+    members_query_string=members_query_string+',';
+    }
+    else{
+    members_query_string=members_query_string+']';
+    }
+}
+
+//console.log(members_query_string);
+}
+
+bp_ids=[7,8,9,10];
+role_codes=["$CGPART","$CGPART","$CGPART","$CGPART"];
+
+genarate_group_members(2,14656,bp_ids,role_codes);
+
+console.log("---------------------------------------------------------");
+//---------------------------------------------------------
+
+
+function remove_group_memebers(org_id,dc_id,bp_ids){
+
+    var members_query_string='[';
+    var final_query_string='';
+
+    for(var i=0; i<bp_ids.length;i++)
+    {
+        members_query_string=members_query_string+'{"bp_id":"'+bp_ids[i]+'"}';
+    
+        if (i<bp_ids.length-1)
+        {
+        members_query_string=members_query_string+','
+        }
+        else{
+        members_query_string=members_query_string+']'
+        }
+    }
+
+    final_query_string='{"org_id":"'+org_id+'","dc_id":"'+dc_id+'","members":'+members_query_string+'}';
+    console.log("remove group members: ",final_query_string);
+}
+
+bp_ids=[13,14,15];
+remove_group_memebers(2,14674,bp_ids);
+console.log("-----------------------------------------------------------------");
+//-----------------------------------------------
+
+
+
+function delete_group(org_id,dc_id){
+    var final_query_string='{"org_id":"'+org_id+'","dc_id":"'+dc_id+'"}';
+    console.log("delete group: ",final_query_string);
+}
+delete_group(2,14676)
+
+console.log("-----------------------------------------------------------------");
+//-----------------------------------------------
+
+
+
+function update_group_name(org_id,dc_id,new_name){
+
+    var final_query_string='{"org_id":"'+org_id+'","dc_id":"'+dc_id+'","dc_name":"'+new_name+'"}';
+    console.log("group name update: ",final_query_string)
+}
+
+
+update_group_name(2,14674,"hello world");
+console.log("-----------------------------------------------------------------");
+//-----------------------------------------------
+
+function ajax(type){
+  var temp_url='/TextChat/'+type;
+
+  console.log(temp_url);
+
+
+}
+
+ajax("DeleteGroup")
+
+
+
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+</body>
+</html>
